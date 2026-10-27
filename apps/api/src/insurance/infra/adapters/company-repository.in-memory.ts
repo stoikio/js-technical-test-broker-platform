@@ -12,7 +12,7 @@ export class InMemoryCompanyRepository implements CompanyRepository {
 
   async findByRegistrationNumber(registrationNumber: string) {
     const company = [...this.snapshots.values()].find(
-      (candidate) => candidate.registrationNumber === registrationNumber,
+      (stored) => stored.registrationNumber === registrationNumber,
     );
 
     return company ? this.clone(company) : null;

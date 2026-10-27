@@ -137,7 +137,7 @@ export class BillingFixture extends BaseFixture {
     },
   ) {
     const balance = (await this.listInvoicesUseCase.execute()).find(
-      (candidate) => candidate.invoice.id === invoiceId,
+      (entry) => entry.invoice.id === invoiceId,
     );
 
     expect({

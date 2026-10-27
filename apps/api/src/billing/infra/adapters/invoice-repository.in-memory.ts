@@ -16,7 +16,7 @@ export class InMemoryInvoiceRepository implements InvoiceRepository {
 
   async findByContractId(contractId: string) {
     const invoice = [...this.snapshots.values()].find(
-      (candidate) => candidate.getProps().contractId === contractId,
+      (stored) => stored.getProps().contractId === contractId,
     );
 
     return invoice ? this.clone(invoice) : null;

@@ -31,7 +31,7 @@ export function ApplyPaymentModal({ invoice, open, onClose }: ApplyPaymentModalP
 
   const selectPayment = (id: string) => {
     setPaymentId(id);
-    const payment = available.find((candidate) => candidate.id === id);
+    const payment = available.find((option) => option.id === id);
     setAmount(
       payment
         ? toAmountInput(applicableAmount(payment.unappliedAmount.amount, invoice))

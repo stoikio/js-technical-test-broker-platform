@@ -1,19 +1,30 @@
-# Harbor
+# Broker platform
 
-Broker workspace: prospects, quotes, client contracts, invoicing and payments.
+## The case
 
-This repository is the starting point of a technical test. The session is a case study: you get a
-product need on top of this codebase, then you clarify it, propose a design, implement part of it
-and we review it together. Nothing to build beforehand. Before the session, please:
+You join the team that builds the platform brokers use to sell insurance to companies. This
+repository is the product as it stands today.
 
-1. get the stack running on your machine (below), and
+In the session you will be given a product need to build on top of it, the way you would get one
+from a product manager. It will be short on purpose: part of the job is to understand what is
+really being asked, so you will ask us product and technical questions, then:
+
+1. propose a high-level design: which entities are involved, how they interact, and how the change
+   fits what already exists;
+2. implement part of it;
+3. review the result with us.
+
+You do not need to prepare a solution. Before the session, please:
+
+1. get the stack running on your machine (see [Start](#start)), and
 2. spend some time reading the code and clicking through the app.
 
-You are welcome to use an AI coding assistant during the session. Have one ready on your machine.
+You can use an AI coding assistant during the session, so have one ready on your machine. You will
+be expected to understand and review what it produces.
 
 ## Product
 
-A broker follows a company from prospect to client:
+Harbor is the workspace a broker uses to follow a company from prospect to client:
 
 1. a **quote** is issued to a company (a number of units at a unit price);
 2. accepting the quote creates a **contract** for one year and its **invoice**;

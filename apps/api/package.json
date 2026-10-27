@@ -6,7 +6,7 @@
     "#src/*": "./src/*"
   },
   "scripts": {
-    "dev": "node --watch --watch-path=src --watch-path=migrations --disable-warning=ExperimentalWarning src/main.ts",
+    "dev": "SEED_DEMO_DATA=true node --watch --watch-path=src --watch-path=migrations --disable-warning=ExperimentalWarning src/main.ts",
     "start": "node --disable-warning=ExperimentalWarning src/main.ts",
     "db:reset": "node --disable-warning=ExperimentalWarning src/scripts/reset-database.ts",
     "test": "vitest run",

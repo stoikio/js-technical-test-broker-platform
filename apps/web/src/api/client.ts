@@ -49,5 +49,11 @@ export const api = {
   post: <Response>(path: string, body?: unknown) => request<Response>('POST', path, body),
 };
 
-export const errorMessage = (error: unknown) =>
-  error instanceof Error ? error.message : 'Something went wrong';
+/** Message to show for a failed call, without the API's technical prefix. */
+export const errorMessage = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return 'Something went wrong';
+  }
+  const message = error.message.replace(/^Precondition failed: /, '');
+  return `${message.charAt(0).toUpperCase()}${message.slice(1)}`;
+};

@@ -4,16 +4,21 @@ import styles from './PageHeader.module.css';
 
 type PageHeaderProps = {
   title: ReactNode;
+  /** Shown next to the title, typically a status badge. */
+  titleExtra?: ReactNode;
   description?: ReactNode;
-  /** Buttons shown on the right, usually the page's main action. */
+  /** Buttons on the right, the page's main action last. */
   actions?: ReactNode;
 };
 
-export function PageHeader({ title, description, actions }: PageHeaderProps) {
+export function PageHeader({ title, titleExtra, description, actions }: PageHeaderProps) {
   return (
     <header className={styles.header}>
-      <div>
-        <h1 className={styles.title}>{title}</h1>
+      <div className={styles.text}>
+        <div className={styles.titleRow}>
+          <h1 className={styles.title}>{title}</h1>
+          {titleExtra}
+        </div>
         {description && <p className={styles.description}>{description}</p>}
       </div>
       {actions && <div className={styles.actions}>{actions}</div>}

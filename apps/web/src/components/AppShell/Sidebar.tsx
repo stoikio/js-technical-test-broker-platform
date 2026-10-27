@@ -1,28 +1,27 @@
 import { NavLink } from 'react-router';
 
-import type { NavigationSection } from '@/app/navigation';
+import type { Space } from '@/app/spaces';
 import { Icon } from '@/components/Icon/Icon';
+import { cx } from '@/utils/cx';
 
 import styles from './AppShell.module.css';
+import { SpaceSwitcher } from './SpaceSwitcher';
 
-export function Sidebar({ navigation }: { navigation: NavigationSection[] }) {
+export function Sidebar({ space, spaces }: { space: Space; spaces: Space[] }) {
   return (
-    <aside className={styles.sidebar}>
-      <div className={styles.brand}>
-        <span className={styles.logo}>H</span>
-        <span className={styles.brandName}>Harbor</span>
+    <nav className={styles.sidebar} aria-label={`${space.label} navigation`}>
+      <div className={styles.switcher}>
+        <SpaceSwitcher current={space} spaces={spaces} />
       </div>
-      <nav className={styles.nav}>
-        {navigation.map((section) => (
-          <div key={section.label} className={styles.section}>
-            <p className={styles.sectionLabel}>{section.label}</p>
+      <div className={styles.nav}>
+        {space.navigation.map((section, index) => (
+          <div key={section.label ?? index} className={styles.section}>
+            {section.label && <p className={styles.sectionLabel}>{section.label}</p>}
             {section.items.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
-                className={({ isActive }) =>
-                  isActive ? `${styles.link} ${styles.active}` : styles.link
-                }
+                className={({ isActive }) => cx(styles.link, isActive && styles.active)}
               >
                 <Icon name={item.icon} />
                 {item.label}
@@ -30,7 +29,11 @@ export function Sidebar({ navigation }: { navigation: NavigationSection[] }) {
             ))}
           </div>
         ))}
-      </nav>
-    </aside>
+      </div>
+      <div className={styles.brand}>
+        <span className={styles.logo}>H</span>
+        Harbor
+      </div>
+    </nav>
   );
 }

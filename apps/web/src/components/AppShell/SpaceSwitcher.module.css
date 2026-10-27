@@ -1,0 +1,134 @@
+.root {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 51px;
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.trigger:hover,
+.expanded {
+  background: var(--color-surface-hover);
+}
+
+.spaceIcon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: white;
+}
+
+.small {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.broker {
+  background: linear-gradient(135deg, #2f7cf2, #0948b1);
+}
+
+.admin {
+  background: linear-gradient(135deg, #636363, #191919);
+}
+
+.names {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.name {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.selector {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  z-index: 100;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  animation: pop-in 120ms ease;
+  transform-origin: top left;
+}
+
+.menuLabel {
+  margin: 0;
+  padding: 5px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 5px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: var(--color-surface-hover);
+}
+
+.current,
+.current:hover {
+  background: var(--color-surface-active);
+}
+
+.itemText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.itemDescription {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.check {
+  color: var(--color-primary);
+}

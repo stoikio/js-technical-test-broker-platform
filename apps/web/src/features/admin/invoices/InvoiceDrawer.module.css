@@ -1,0 +1,14 @@
+.progress {
+  height: 6px;
+  margin: 4px 0 8px;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-active);
+}
+
+.bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: #3fb553;
+  transition: width 300ms ease;
+}

@@ -1,5 +1,5 @@
-.card {
-  margin-bottom: 24px;
+.card + .card {
+  margin-top: 28px;
 }
 
 .header {
@@ -7,11 +7,23 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 12px;
+  min-height: 36px;
+  margin-bottom: 8px;
+}
+
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .title {
-  font-size: 16px;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.meta {
+  color: var(--color-text-muted);
 }
 
 .actions {

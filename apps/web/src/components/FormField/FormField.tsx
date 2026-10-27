@@ -1,6 +1,8 @@
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from 'react';
 import { useId } from 'react';
 
+import { Icon } from '@/components/Icon/Icon';
+
 import styles from './FormField.module.css';
 
 type FieldProps = {
@@ -11,14 +13,16 @@ type FieldProps = {
 
 type FieldShellProps = FieldProps & {
   id: string;
+  required?: boolean;
   children: ReactNode;
 };
 
-function FieldShell({ id, label, hint, error, children }: FieldShellProps) {
+function FieldShell({ id, label, hint, error, required, children }: FieldShellProps) {
   return (
     <div className={styles.field}>
       <label className={styles.label} htmlFor={id}>
         {label}
+        {required && <span className={styles.required}>*</span>}
       </label>
       {children}
       {error ? (
@@ -37,7 +41,13 @@ export function TextField({ label, hint, error, ...inputProps }: TextFieldProps)
   const id = useId();
 
   return (
-    <FieldShell id={id} label={label} hint={hint} error={error}>
+    <FieldShell
+      id={id}
+      label={label}
+      hint={hint}
+      error={error}
+      required={inputProps.required}
+    >
       <input
         id={id}
         className={styles.control}
@@ -65,7 +75,13 @@ export function SelectField({
   const id = useId();
 
   return (
-    <FieldShell id={id} label={label} hint={hint} error={error}>
+    <FieldShell
+      id={id}
+      label={label}
+      hint={hint}
+      error={error}
+      required={selectProps.required}
+    >
       <select
         id={id}
         className={styles.control}
@@ -85,5 +101,20 @@ export function SelectField({
 
 /** A server or form-level error, shown above the submit button. */
 export function FormError({ error }: { error: string | null }) {
-  return error ? <p className={styles.formError}>{error}</p> : null;
+  return error ? (
+    <p className={styles.formError} role="alert">
+      <Icon name="alert" size={18} />
+      {error}
+    </p>
+  ) : null;
+}
+
+/** Lays fields out side by side, wrapping on narrow screens. */
+export function FieldRow({ children }: { children: ReactNode }) {
+  return <div className={styles.fieldRow}>{children}</div>;
+}
+
+/** Buttons at the end of an inline form, aligned right. */
+export function FormActions({ children }: { children: ReactNode }) {
+  return <div className={styles.actions}>{children}</div>;
 }

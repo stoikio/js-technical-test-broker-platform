@@ -1,6 +1,8 @@
 import type { UseQueryResult } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 
+import { Icon } from '@/components/Icon/Icon';
+
 import styles from './QueryBoundary.module.css';
 
 type QueryBoundaryProps<Data> = {
@@ -11,12 +13,21 @@ type QueryBoundaryProps<Data> = {
 /** Renders the loading and error states of a query, and `children` once data is there. */
 export function QueryBoundary<Data>({ query, children }: QueryBoundaryProps<Data>) {
   if (query.isPending) {
-    return <p className={styles.loading}>Loading...</p>;
+    return (
+      <div className={styles.loading} aria-busy="true" aria-label="Loading">
+        <span className={styles.bar} />
+        <span className={styles.bar} />
+        <span className={styles.bar} />
+      </div>
+    );
   }
 
   if (query.isError) {
     return (
-      <p className={styles.error}>Could not load this page: {query.error.message}</p>
+      <p className={styles.error} role="alert">
+        <Icon name="alert" size={18} />
+        Could not load this content: {query.error.message}
+      </p>
     );
   }
 

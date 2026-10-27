@@ -1,6 +1,7 @@
 import { type FormEvent, type ReactNode, useEffect, useRef } from 'react';
 
 import { Button } from '@/components/Button/Button';
+import { Icon } from '@/components/Icon/Icon';
 
 import styles from './Modal.module.css';
 
@@ -46,15 +47,23 @@ export function Modal({
       <form onSubmit={handleSubmit}>
         <header className={styles.header}>
           <h2 className={styles.title}>{title}</h2>
+          <button
+            type="button"
+            className={styles.close}
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <Icon name="close" size={18} />
+          </button>
         </header>
         <div className={styles.body}>{children}</div>
         <footer className={styles.footer}>
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="default" onClick={onClose}>
             Cancel
           </Button>
           {onSubmit && (
-            <Button type="submit" disabled={submitting}>
-              {submitting ? 'Saving...' : submitLabel}
+            <Button type="submit" loading={submitting}>
+              {submitLabel}
             </Button>
           )}
         </footer>

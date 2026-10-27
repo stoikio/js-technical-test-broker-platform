@@ -1,29 +1,38 @@
 .button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   font-weight: 500;
-  cursor: pointer;
   white-space: nowrap;
-  transition: background-color 120ms ease;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 100ms ease,
+    border-color 100ms ease;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .button:disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-.md {
-  height: 34px;
-  padding: 0 14px;
+.sm {
+  height: var(--control-height);
+  padding: 0 16px;
+  font-size: var(--font-size-sm);
 }
 
-.sm {
+.xs {
   height: 28px;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: var(--font-size-xs);
 }
 
 .primary {
@@ -35,20 +44,36 @@
   background: var(--color-primary-hover);
 }
 
-.secondary {
+.default {
   background: var(--color-surface);
-  border-color: var(--color-border);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
 }
 
-.secondary:hover:not(:disabled) {
-  background: var(--color-surface-hover);
+.default:hover:not(:disabled) {
+  background: var(--color-surface-muted);
 }
 
-.ghost {
+.subtle {
   background: transparent;
   color: var(--color-primary);
 }
 
-.ghost:hover:not(:disabled) {
+.subtle:hover:not(:disabled) {
   background: var(--color-primary-soft);
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

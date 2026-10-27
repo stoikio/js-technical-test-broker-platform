@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { cx } from '@/utils/cx';
+
 import styles from './Table.module.css';
 
 export type Column<Row> = {
@@ -7,6 +9,8 @@ export type Column<Row> = {
   header: ReactNode;
   render: (row: Row) => ReactNode;
   align?: 'left' | 'right';
+  /** Fixed column width in pixels, for short values like dates and badges. */
+  width?: number;
 };
 
 type TableProps<Row> = {
@@ -14,6 +18,8 @@ type TableProps<Row> = {
   rows: Row[];
   getRowKey: (row: Row) => string;
   onRowClick?: (row: Row) => void;
+  /** Highlights the row shown in an open drawer. */
+  selectedRowKey?: string;
   /** Rendered instead of the table when `rows` is empty. */
   empty?: ReactNode;
 };
@@ -23,6 +29,7 @@ export function Table<Row>({
   rows,
   getRowKey,
   onRowClick,
+  selectedRowKey,
   empty,
 }: TableProps<Row>) {
   if (rows.length === 0 && empty) {
@@ -38,6 +45,7 @@ export function Table<Row>({
               <th
                 key={column.key}
                 className={column.align === 'right' ? styles.right : undefined}
+                style={column.width ? { width: column.width } : undefined}
               >
                 {column.header}
               </th>
@@ -45,24 +53,46 @@ export function Table<Row>({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr
-              key={getRowKey(row)}
-              className={onRowClick ? styles.clickable : undefined}
-              onClick={onRowClick ? () => onRowClick(row) : undefined}
-            >
-              {columns.map((column) => (
-                <td
-                  key={column.key}
-                  className={column.align === 'right' ? styles.right : undefined}
-                >
-                  {column.render(row)}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {rows.map((row) => {
+            const key = getRowKey(row);
+            return (
+              <tr
+                key={key}
+                className={cx(
+                  onRowClick && styles.clickable,
+                  key === selectedRowKey && styles.selected,
+                )}
+                onClick={onRowClick ? () => onRowClick(row) : undefined}
+              >
+                {columns.map((column) => (
+                  <td
+                    key={column.key}
+                    className={column.align === 'right' ? styles.right : undefined}
+                  >
+                    {column.render(row)}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+/** Primary text of a cell with an optional muted second line. */
+export function CellText({
+  primary,
+  secondary,
+}: {
+  primary: ReactNode;
+  secondary?: ReactNode;
+}) {
+  return (
+    <div className={styles.cellText}>
+      <span className={styles.primary}>{primary}</span>
+      {secondary && <span className={styles.secondary}>{secondary}</span>}
     </div>
   );
 }

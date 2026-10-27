@@ -29,7 +29,15 @@
     "import/no-cycle": "error",
     "react/react-in-jsx-scope": "off",
     "vitest/expect-expect": "off",
-    "vitest/no-standalone-expect": "off"
+    "vitest/no-standalone-expect": "off",
+    "import/no-unassigned-import": [
+      "warn",
+      {
+        "allow": [
+          "**/*.css"
+        ]
+      }
+    ]
   },
   "ignorePatterns": [
     "**/node_modules/**",

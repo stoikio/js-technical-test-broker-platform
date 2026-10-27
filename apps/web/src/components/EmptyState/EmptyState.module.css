@@ -1,0 +1,20 @@
+.empty {
+  padding: 40px 24px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.description {
+  margin: 4px 0 0;
+  color: var(--color-text-muted);
+}
+
+.action {
+  margin-top: 16px;
+}

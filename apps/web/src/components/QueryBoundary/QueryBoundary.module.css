@@ -1,0 +1,10 @@
+.loading {
+  color: var(--color-text-muted);
+}
+
+.error {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}

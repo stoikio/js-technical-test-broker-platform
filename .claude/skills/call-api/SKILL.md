@@ -1,6 +1,6 @@
 ---
 name: call-api
-description: Call an API endpoint from the web app through TanStack Query hooks in apps/web/src/api. Use when a page needs data from, or sends data to, the API.
+description: Call an API endpoint from the web app through TanStack Query hooks in apps/web/src/api. Use when a page or drawer needs data from, or sends data to, the API.
 ---
 
 # Call the API
@@ -12,8 +12,8 @@ The front end only talks to the API through hooks in `apps/web/src/api/`.
    With the API running: `curl -s localhost:3000/<path> | jq`.
 2. **Type the response** in `apps/web/src/api/types.ts`. Amounts are `Money`
    (`{ amount, currency }`, minor units), dates are strings.
-3. **Add the hook** to the file of the area (`companies.ts`, `billing.ts`) or a new
-   `src/api/<area>.ts`:
+3. **Add the hook** to the file of the area (`companies.ts` for the broker space data,
+   `billing.ts` for the admin space data) or a new `src/api/<area>.ts`:
 
    ```ts
    export const widgetKeys = {
@@ -39,7 +39,10 @@ The front end only talks to the API through hooks in `apps/web/src/api/`.
 
    - Paths are relative to the API root: `api.get('/invoices')` hits `/api/invoices`, which
      Vite proxies to the API.
-   - Every mutation invalidates the queries it makes stale.
+   - Every mutation invalidates the queries it makes stale, including those shown by the
+     other space (accepting a quote issues an invoice).
+   - A list and its drawer can share one query: the drawer finds its row in the cached list
+     (see `QuoteDrawer`), or fetches the detail endpoint when there is one (`useInvoice`).
 4. **Handle errors**: a failed call throws `ApiError` with `status`, `code` (for example
    `billing.payment.amountExceedsUnapplied`) and `details`. Show `errorMessage(error)` in a
    `FormError`; branch on `error.code` only when the UI must react differently.

@@ -7,4 +7,5 @@ paths:
 - Response types live in `apps/web/src/api/types.ts` and mirror the API as it is. Do not
   reshape API data inside hooks.
 - Amounts are integers in minor units with a currency. Format with `formatMoney`, parse input
-  with `parseAmountInput`. Never `parseFloat` an amount.
+  with `parseAmountInput`. Never `parseFloat` an amount. Payment amounts are signed: negative
+  is money paid out.
